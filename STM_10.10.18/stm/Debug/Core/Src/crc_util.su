@@ -1,0 +1,4 @@
+../Core/Src/crc_util.c:21:6:crc_util_initialise	8	static
+../Core/Src/crc_util.c:35:10:crc_calculate	16	static
+../Core/Src/crc_util.c:59:9:crc_get_reversed_first_byte	16	static
+../Core/Src/crc_util.c:76:9:crc_get_reversed_second_byte	8	static

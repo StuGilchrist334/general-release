@@ -1,0 +1,15 @@
+../Core/Src/tasktable_init.c:86:5:get_iref_sensor_number	16	static
+../Core/Src/tasktable_init.c:117:5:task_get_electrode_gain	0	static
+../Core/Src/tasktable_init.c:125:6:task_set_electrode_gain	12	static
+../Core/Src/tasktable_init.c:147:6:get_first_iref_scan	16	static
+../Core/Src/tasktable_init.c:359:6:update_electrode_numbers	48	static
+../Core/Src/tasktable_init.c:180:6:get_first_ph_scan	40	static
+../Core/Src/tasktable_init.c:560:6:reset_frequencies	8	static
+../Core/Src/tasktable_init.c:568:6:reset_pulse_amplitudes	8	static
+../Core/Src/tasktable_init.c:576:6:reset_qaqcs	8	static
+../Core/Src/tasktable_init.c:584:6:reset_peaks_loops	8	static
+../Core/Src/tasktable_init.c:596:6:reset_peak_potentials	8	static
+../Core/Src/tasktable_init.c:604:6:reset_clipped_at_gain	8	static
+../Core/Src/tasktable_init.c:612:6:reset_fresh_electrodes	8	static
+../Core/Src/tasktable_init.c:618:6:add_ph_peak_to_loop_array	16	static
+../Core/Src/tasktable_init.c:628:6:add_iref_peak_to_loop_array	16	static

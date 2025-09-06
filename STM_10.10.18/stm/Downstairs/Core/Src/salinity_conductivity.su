@@ -1,0 +1,3 @@
+../Core/Src/salinity_conductivity.c:4:8:calculate_salinity	24	static
+../Core/Src/salinity_conductivity.c:37:8:calculate_specific_conductivity	24	static
+../Core/Src/salinity_conductivity.c:48:8:calculate_actual_conductivity	24	static

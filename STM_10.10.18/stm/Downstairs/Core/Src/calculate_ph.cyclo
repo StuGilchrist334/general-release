@@ -1,0 +1,13 @@
+../Core/Src/calculate_ph.c:20:8:reading_avg	2
+../Core/Src/calculate_ph.c:423:9:get_electrode_health_value	12
+../Core/Src/calculate_ph.c:455:6:clear_ph_array	1
+../Core/Src/calculate_ph.c:365:9:get_transducer_health	18
+../Core/Src/calculate_ph.c:471:6:clear_peak_potential_offsets	1
+../Core/Src/calculate_ph.c:479:6:clear_electrode_health	2
+../Core/Src/calculate_ph.c:487:6:set_default_gains	1
+../Core/Src/calculate_ph.c:505:8:quadratic_fit_end_value	5
+../Core/Src/calculate_ph.c:565:8:logistic	1
+../Core/Src/calculate_ph.c:570:8:median_of_three	9
+../Core/Src/calculate_ph.c:33:8:calculate_ph	5
+../Core/Src/calculate_ph.c:580:6:calculate_scan_health	4
+../Core/Src/calculate_ph.c:80:8:calculate_ph_running_average_scan	62

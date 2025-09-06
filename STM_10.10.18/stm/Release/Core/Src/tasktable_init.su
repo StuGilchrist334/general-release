@@ -1,0 +1,4 @@
+../Core/Src/tasktable_init.c:55:6:tasktable_initialise_ocean_measurement_default	416	static
+../Core/Src/tasktable_init.c:149:6:tasktable_initialise_fresh_water_measurement_default	416	static
+../Core/Src/tasktable_init.c:214:5:get_iref_sensor_number	8	static
+../Core/Src/tasktable_init.c:243:5:get_electrode_gain_setting	16	static

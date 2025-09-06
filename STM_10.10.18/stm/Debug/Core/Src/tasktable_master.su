@@ -1,0 +1,6 @@
+../Core/Src/tasktable_master.c:37:6:process_peak_potentials_after_scan	136	static
+../Core/Src/tasktable_master.c:299:6:update_task_after_scan	64	static
+../Core/Src/tasktable_master.c:621:6:update_iref_health_status	16	static
+../Core/Src/tasktable_master.c:644:6:update_iref_secondary_health_status	16	static
+../Core/Src/tasktable_master.c:664:6:calculate_peak_potential_offsets	152	static
+../Core/Src/tasktable_master.c:709:5:cmpfunc_d	16	static

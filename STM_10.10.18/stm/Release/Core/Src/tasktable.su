@@ -1,0 +1,14 @@
+../Core/Src/tasktable.c:59:6:addtask	16	static
+../Core/Src/tasktable.c:94:5:removetask	40	static
+../Core/Src/tasktable.c:151:6:gettask	168	static
+../Core/Src/tasktable.c:187:6:getnexttask	176	static
+../Core/Src/tasktable.c:294:5:updateparamfortask	40	static
+../Core/Src/tasktable.c:480:5:updateparamforlasttask	32	static
+../Core/Src/tasktable.c:504:6:reset_last_sensor_setting_in_table	16	static
+../Core/Src/tasktable.c:528:5:updatelastworkingsensor	16	static
+../Core/Src/tasktable.c:566:5:get_task_table_size	8	static
+../Core/Src/tasktable.c:582:6:reset_next_task_to_start_of_tasktable	8	static
+../Core/Src/tasktable.c:595:5:tasktable_increase_resistor_gain	24	static
+../Core/Src/tasktable.c:624:5:tasktable_decrease_resistor_gain	24	static
+../Core/Src/tasktable.c:655:6:get_gain_up_flag	8	static
+../Core/Src/tasktable.c:667:6:get_gain_down_flag	8	static

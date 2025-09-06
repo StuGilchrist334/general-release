@@ -1,0 +1,2 @@
+../Core/Src/salinity_conductivity.c:45:8:calculate_salinity	1
+../Core/Src/salinity_conductivity.c:66:8:calculate_conductivity	1

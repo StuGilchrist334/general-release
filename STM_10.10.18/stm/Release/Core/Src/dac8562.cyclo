@@ -1,0 +1,5 @@
+../Core/Src/dac8562.c:26:13:write_to_dac	1
+../Core/Src/dac8562.c:45:13:DAC_initialize	1
+../Core/Src/dac8562.c:113:6:dac8562_init	1
+../Core/Src/dac8562.c:134:6:DAC_SET_A	2
+../Core/Src/dac8562.c:160:6:DAC_SET_B	2

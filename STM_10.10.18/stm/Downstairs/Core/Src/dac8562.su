@@ -1,0 +1,4 @@
+../Core/Src/dac8562.c:4:13:write_to_dac	16	static
+../Core/Src/dac8562.c:91:6:dac8562_init	32	static
+../Core/Src/dac8562.c:112:6:DAC_SET_A	16	static
+../Core/Src/dac8562.c:138:6:DAC_SET_B	16	static

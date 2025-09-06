@@ -1,0 +1,11 @@
+../Core/Src/calculate_ph.c:32:8:reading_avg	2
+../Core/Src/calculate_ph.c:52:8:calculate_m	1
+../Core/Src/calculate_ph.c:65:8:calculate_c	1
+../Core/Src/calculate_ph.c:98:8:calculate_ph	5
+../Core/Src/calculate_ph.c:160:8:calculate_ph_sensor_average_scan	7
+../Core/Src/calculate_ph.c:213:8:calculate_ph_running_average_scan	19
+../Core/Src/calculate_ph.c:274:9:get_transducer_health	13
+../Core/Src/calculate_ph.c:315:9:get_electrode_health_value	4
+../Core/Src/calculate_ph.c:330:6:clear_ph_array	2
+../Core/Src/calculate_ph.c:343:6:clear_electrode_health	2
+../Core/Src/calculate_ph.c:353:6:clear_electrode_gain	1

@@ -1,0 +1,2 @@
+../Core/Src/adc_channel.c:57:6:adc_channel_init	3
+../Core/Src/adc_channel.c:84:6:adc_channel_select	3

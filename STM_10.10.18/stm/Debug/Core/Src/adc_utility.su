@@ -1,0 +1,5 @@
+../Core/Src/adc_utility.c:9:6:adc_utility_init	40	static
+../Core/Src/adc_utility.c:26:9:adc_convert_manipulate	16	static
+../Core/Src/adc_utility.c:46:9:adc_convert_manipulate_vp	16	static
+../Core/Src/adc_utility.c:62:9:adc_conversion	24	static
+../Core/Src/adc_utility.c:78:5:check_signal_size	160	static
