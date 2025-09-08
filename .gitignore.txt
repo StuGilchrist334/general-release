@@ -1,0 +1,19 @@
+# Ignore IDE settings
+.settings/
+.vscode/
+.idea/
+
+# Ignore build output
+debug/
+release/
+bin/
+obj/
+out/
+
+# Ignore system files
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
