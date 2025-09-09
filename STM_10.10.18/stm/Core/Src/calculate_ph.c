@@ -424,7 +424,7 @@ uint8_t get_electrode_health_value(int sensor_number, int second_sensor_number, 
 {
 	uint8_t max_failure_count = MAX_HEALTH;
 	
-	if(healthwatch || ocean_scan)
+	if(healthwatch || !vf_scan)
 	{
 		if((calculated_ph == PH_DEFAULT_OUT_OF_RANGE_VALUE) || !ph_flags_ok)//scan failed because of calculation or outlier
 		{

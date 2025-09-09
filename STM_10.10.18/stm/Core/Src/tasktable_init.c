@@ -237,11 +237,11 @@ void get_first_ph_scan()
 		current_task.start_mv = 720;
 
 	//<defaults set
-	int loop_count = eeprom_read_loop_count(); //sg! try again
-	if((int)((loop_count % 20)/ 10) == 0)
-		ph_peak_shift_start = 150;
-	else
-		ph_peak_shift_start = 350;
+	//int loop_count = eeprom_read_loop_count(); //sg! try again
+	//if((int)((loop_count % 20)/ 10) == 0)
+	//	ph_peak_shift_start = 150;
+	//else
+	//	ph_peak_shift_start = 350;
 
 	//set start and span if we have previous data stored
 	if(avg_ph_peak_potential_stored) //override the start and span if we've got good data to refer to
@@ -361,14 +361,17 @@ void update_electrode_numbers(void)
 	bool electrode_found = false, take_anything = true;
 	int first_electrode_number = 1, second_electrode_number = 0, third_electrode_number = 0;
 	int good_electrodes_available = number_of_ph_electrodes, total_electrodes_to_be_grouped = number_of_ph_electrodes, total_singles_to_be_scanned = 0;
-	bool randomising_ocean = false, using_ringers = true, healthwatching = true;
+	bool randomising_ocean = false, using_ringers = false, healthwatching = false;
 	bool ringer_loop = ((eeprom_read_loop_count() % 10) == 0);
 
 	if(scan_first_flag)
 		ringer_loop = true;
 
-	if(ocean_scan)
-		healthwatching = false;
+	if(vf_scan)
+	{
+		healthwatching = true;
+		using_ringers = true;
+	}
 
 	int first_healthwatch_electrode_number, second_healthwatch_electrode_number;
 	int loop_count = eeprom_read_loop_count();
@@ -462,7 +465,10 @@ void update_electrode_numbers(void)
 	}
 	else //either fresh or vf
 	{
-		healthwatch = false; //refers to this particular scan
+		if(vf_scan)
+			healthwatch = false; //refers to this particular scan. start off false as default.
+		else
+			healthwatch = true;
 
 		if(good_electrodes_available > 0) //look for good electrodes first
 			take_anything = false;

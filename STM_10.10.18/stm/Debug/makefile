@@ -63,8 +63,8 @@ all: main-build
 main-build: stm.elf secondary-outputs
 
 # Tool invocations
-stm.elf stm.map: $(OBJS) $(USER_OBJS) C:\Stu\OneDrive\Documents\ANB\stm\ code\current\ code\changes\ in\ progress\STM_10.10.18\stm\STM32G071RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "stm.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Stu\OneDrive\Documents\ANB\stm code\current code\changes in progress\STM_10.10.18\stm\STM32G071RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+stm.elf stm.map: $(OBJS) $(USER_OBJS) C:\Users\ANB\Desktop\STM_general_release\general-release\STM_10.10.18\stm\STM32G071RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "stm.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\ANB\Desktop\STM_general_release\general-release\STM_10.10.18\stm\STM32G071RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
