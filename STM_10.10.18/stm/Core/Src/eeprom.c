@@ -1035,7 +1035,7 @@ uint8_t eeprom_read_power(void)
 uint8_t eeprom_read_salinity_range(void)
 {
 	uint8_t read_value = 0;
-	read_value = eeprom_read_byte_with_checks(DEVICE_SALINITY_RANGE_ADDRESS, 1, 2, 1);
+	read_value = eeprom_read_byte_with_checks(DEVICE_SALINITY_RANGE_ADDRESS, 1, 3, 1);
 	return read_value;
 }
 

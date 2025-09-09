@@ -203,8 +203,10 @@ void process_commands(void)
 			perform_existing_measurement_routine_flag = true;
 			if(eeprom_read_salinity_range() == 1)
 				perform_fresh_measurement_routine_flag = true;
-			else
+			else if(eeprom_read_salinity_range() == 2)
 				perform_ocean_measurement_routine_flag = true;
+			if(eeprom_read_salinity_range() == 3)
+				perform_vf_measurement_routine_flag = true;
 
 			scan_internal_interval_flag = true;
 			scan_first_flag = true;
@@ -214,8 +216,10 @@ void process_commands(void)
 			perform_existing_measurement_routine_flag = true;
 			if(eeprom_read_salinity_range() == 1)
 				perform_fresh_measurement_routine_flag = true;
-			else
+			else if(eeprom_read_salinity_range() == 2)
 				perform_ocean_measurement_routine_flag = true;
+			if(eeprom_read_salinity_range() == 3)
+				perform_vf_measurement_routine_flag = true;
 
 			scan_internal_interval_flag = true;
 		}
