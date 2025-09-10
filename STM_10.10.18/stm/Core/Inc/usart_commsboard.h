@@ -37,7 +37,8 @@ extern volatile bool already_scanning;
 extern uint32_t immersion_adc_difference;
 extern volatile uint16_t precon_diagnostic, failure_diagnostic, parameters_diagnostic;
 extern uint32_t first_peak_potential;
-extern float peak_potential_1, peak_potential_2, peak_potential_3, peak_potential_4,  peak_potential_5;
+extern float peak_potential_i1, peak_potential_i2, peak_potential_diff_raw, peak_potential_diff_balanced;
+extern float peak_potential_displayed_2, peak_potential_displayed_3, peak_potential_used;
 extern int16_t temperature_adc, temperature_adc_range;
 extern float signal_scatter;
 

@@ -31,7 +31,8 @@ volatile bool scan_first_flag = false;
 extern volatile usart_timer_struct command_received_global;
 uint32_t immersion_adc_difference = 0;
 volatile uint16_t precon_diagnostic = 0, failure_diagnostic = 0, parameters_diagnostic = 0;
-float peak_potential_1 = 0, peak_potential_2 = 0, peak_potential_3 = 0, peak_potential_4 = 0,  peak_potential_5 = 0;
+float peak_potential_i1 = 0, peak_potential_i2 = 0, peak_potential_diff_raw = 0, peak_potential_diff_balanced = 0;
+float peak_potential_displayed_2 = 0, peak_potential_displayed_3 = 0, peak_potential_used = 0;
 
 uint32_t first_peak_potential = 0;
 bool salinity_out_of_range = false;
@@ -1353,8 +1354,6 @@ void reply_qaqc_data(void)
 	uint8_t electrode_health_and_gain = (uint8_t)(local_qaqc_reply->electrode_health << 4) + local_qaqc_reply->gain;
 	transmit_data_array[3] = electrode_health_and_gain;
 
-	bool data_not_ready = false;
-
 	float temp_value = (float) local_qaqc_reply->running_average_ph;
 	if((local_qaqc_reply->running_average_ph == PH_DEFAULT_OUT_OF_RANGE_VALUE) || (local_qaqc_reply->array_health >= 3))
 	{
@@ -1362,7 +1361,6 @@ void reply_qaqc_data(void)
 		transmit_data_array[5] = 0xc7;
 		transmit_data_array[6] = 0xff;
 		transmit_data_array[7] = 0x7d;
-		data_not_ready = true;
 	}	
 	else		
 		float_to_byte_array(&transmit_data_array[4], temp_value);
@@ -1371,7 +1369,7 @@ void reply_qaqc_data(void)
 	float_to_byte_array(&transmit_data_array[8], temp_value);
 
 	temp_value = (float) local_qaqc_reply->salinity;
-	if(salinity_out_of_range) // || data_not_ready)
+	if(salinity_out_of_range || using_previous_iref)
 	{
 		transmit_data_array[12] = 0x42;
 		transmit_data_array[13] = 0xc7;
@@ -1383,7 +1381,7 @@ void reply_qaqc_data(void)
 
 	temp_value = (float) local_qaqc_reply->specific_conductivity;
 
-	if(salinity_out_of_range) // || data_not_ready)//if salinity out of range then conductivity not valid either
+	if(salinity_out_of_range || using_previous_iref)//if salinity out of range then conductivity not valid either
 	{
 		transmit_data_array[16] = 0x42;
 		transmit_data_array[17] = 0xc7;
@@ -1407,8 +1405,6 @@ void reply_qaqc_data(void)
 	transmit_data_array[25] = temp_value2[0];
 	transmit_data_array[26] = temp_value2[1];
 
-	if(iref_scan)
-		parameters_diagnostic = peak_potential_3; //sg!
 	convert_dac_potential_to_custom_bcd_2_byte_qaqc(&temp_value2[0], parameters_diagnostic);
 	local_qaqc_reply->parameters_diagnostic_reply = (uint16_t) ((uint16_t) (temp_value2[0] << 8)) + temp_value2[1];
 	transmit_data_array[27] = temp_value2[0];
@@ -1431,7 +1427,7 @@ void reply_qaqc_data(void)
 	transmit_data_array[35] = (uint8_t) ((local_qaqc_reply->max_value_reply) >> 8);
 	transmit_data_array[36] = (uint8_t) local_qaqc_reply->max_value_reply;
 
-	local_qaqc_reply->first_peak_potential_reply = peak_potential_2;
+	local_qaqc_reply->first_peak_potential_reply = peak_potential_displayed_2;
 	transmit_data_array[37] = (uint8_t) ((local_qaqc_reply->first_peak_potential_reply) >> 8);
 	transmit_data_array[38] = (uint8_t) local_qaqc_reply->first_peak_potential_reply;
 

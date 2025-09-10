@@ -410,8 +410,8 @@ void scan(int scan_type)
 
 			qaqc_reply.electrode_health = iref_failures;
 				
-			//if(current_task.first_scan)
-			//	peak_potential_3 = immersion_adc_difference; //show immersion on first scan
+			if(current_task.first_scan)
+				peak_potential_displayed_2 = immersion_adc_difference; //show immersion on first scan
 		}
 		else if(ph_scan && !current_task.multielectrode_scan) //some actions relating to pH health
 		{

@@ -39,9 +39,11 @@ void smoothing_function(
 	uint16_t size_of_array,
 	qaqc_reply_struct *output_data)
 {
-	float QAQC2 = 0;
-	uint16_t peak_value;
+	float qaqc2_used = 0, qaqc2_i1 = 0, qaqc2_i2 = 0, qaqc2_diff = 0;
+	uint16_t peak_value_used = 0, peak_value_i1 = 0, peak_value_i2 = 0, peak_value_diff = 0;
 	float dummy;
+
+	int peaks_found_i2 = 0, peaks_found_i1 = 0, peaks_found_diff = 0;
 
 	adc_mark_data_global[0] = adc_mark_data_global[2];
 	adc_mark_data_global[1] = adc_mark_data_global[2];
@@ -73,8 +75,9 @@ void smoothing_function(
 	for(int i = 0; i < size_of_array; i++)
 		adc_mark_data_global[i] = (uint16_t)adc_mark_space_array_2_global[i];
 
-	//if(iref_scan) //old-style peak finding
-	//{
+
+	//now we are going to find the peaks associated with I1, I2, the difference, and use whatever is dictated by the scan type, ph or iref, vf or other
+
 		//recreate the difference array from these smoothed arrays (albeit integers)
 		for(int i = 0; i < size_of_array; i++)
 			adc_mark_space_array_1_global[i] =  abs(adc_space_data_global[i] - adc_mark_data_global[i]);
@@ -96,65 +99,67 @@ void smoothing_function(
 		box_filter_size = 33;
 		box_filter(adc_mark_space_array_1_global, adc_mark_space_array_2_global, box_filter_size, size_of_array);
 
-		//so for iref we just gerate the peak and the un-normalised peak as usual
-		peak_potential_4 = find_peak(adc_mark_space_array_2_global, &peak_potential_3, &QAQC2, &peak_value, size_of_array, true, (ph_scan && !current_task.multielectrode_scan)); //find peak of difference
-	//}
-	//if(ph_scan)
-	//{
-		int peaks_found_i2 = 0, peaks_found_i1 = 0;
+		peak_potential_diff_raw = find_peak(adc_mark_space_array_2_global, &peak_potential_diff_balanced, &qaqc2_diff, &peak_value_diff, size_of_array, true, (ph_scan && !current_task.multielectrode_scan)); //find peak of difference
+		peaks_found_diff = peaks_found;
 
-		//get I2 again
+		//get I2 again into smoothed float format and find peak
 		for(int i = 0; i < size_of_array; i++)
 			adc_mark_space_array_1_global[i] = fabs((float)adc_space_data_global[i] - 16383.0);
-		//need a bit more smoothing before looking for peaks
+
 		box_filter(adc_mark_space_array_1_global, adc_mark_space_array_2_global, box_filter_size, size_of_array);
-		dummy = find_peak(adc_mark_space_array_2_global, &peak_potential_2, &QAQC2, &peak_value, size_of_array, true, false);
+		dummy = find_peak(adc_mark_space_array_2_global, &peak_potential_i2, &qaqc2_i2, &peak_value_i2, size_of_array, true, false);
 		peaks_found_i2 = peaks_found;
 
-		//get I1 again
+		//get I1 again into smoothed float format and find peak
 		for(int i = 0; i < size_of_array; i++)
 			adc_mark_space_array_1_global[i] = fabs((float)adc_mark_data_global[i] - 16383.0);
-		//need a bit more smoothing before looking for peaks
+
 		box_filter(adc_mark_space_array_1_global, adc_mark_space_array_2_global, box_filter_size, size_of_array);
-		dummy = find_peak(adc_mark_space_array_2_global, &peak_potential_1, &QAQC2, &peak_value, size_of_array, true, false); //I1 flav negative peak
+		dummy = find_peak(adc_mark_space_array_2_global, &peak_potential_i1, &qaqc2_i1, &peak_value_i1, size_of_array, true, false); //I1 flav negative peak
 		peaks_found_i1 = peaks_found;
 
-		//having measured both I1 and I2, we want the 'higher' peak. also check if I2 wasn't a default peak. also go back if I1 had no peaks but I2 did
-		if(ph_scan)
+		//having measured both I1 and I2, in vf we want the 'higher' peak. also check if I2 wasn't a default non-peak. also go back if I1 had no peaks but I2 did
+		if(ph_scan && vf_scan)
 		{
-			if(((peak_potential_2 > peak_potential_1) && (peaks_found_i2 > 0)) || ((peaks_found_i2 > 0) && (peaks_found_i1 == 0)))
+			if(((peak_potential_i2 > peak_potential_i1) && (peaks_found_i2 > 0)) || ((peaks_found_i2 > 0) && (peaks_found_i1 == 0)))
 			{
-				peak_potential_2 = peak_potential_1; //this is now the 'lower' peak
-				//get I2 again
-				for(int i = 0; i < size_of_array; i++)
-					adc_mark_space_array_1_global[i] = fabs((float)adc_space_data_global[i] - 16383.0);
+				peak_potential_displayed_2 = peak_potential_i1; //this is now the 'lower' peak
 
-				box_filter(adc_mark_space_array_1_global, adc_mark_space_array_2_global, box_filter_size, size_of_array);
-				dummy = find_peak(adc_mark_space_array_2_global, &peak_potential_1, &QAQC2, &peak_value, size_of_array, true, false);
+				peak_potential_used = peak_potential_i2;
+				qaqc2_used = qaqc2_i2;
+				peak_value_used = peak_value_i2;
+			}
+			else
+			{
+				peak_potential_displayed_2 = peak_potential_i2;
+
+				peak_potential_used = peak_potential_i1;
+				qaqc2_used = qaqc2_i1;
+				peak_value_used = peak_value_i1;
 			}
 		}
-	//}
+		else
+		{
+			peak_potential_used = peak_potential_diff_balanced;
+			qaqc2_used = qaqc2_diff;
+			peak_value_used = peak_value_diff;
+			peak_potential_displayed_2 = peak_potential_diff_raw;
+		}
 
 	//apply offset to tighten results
 	if(ph_scan && ocean_scan) //single pH electrodes
 	{
 		if(!current_task.multielectrode_scan)
 		{
-			first_peak_potential = peak_potential_1; //store the uncorrected value for display
-			peak_potential_1 += peak_potential_offsets[current_task.sensor_number - 1];
+			peak_potential_displayed_2 = peak_potential_diff_balanced; //store the uncorrected (but balanced) value for display
+			peak_potential_used += peak_potential_offsets[current_task.sensor_number - 1];
 		}
 	}
 
-	//whatever peak finding has happened above, it's the last one which provides the values to be used for pH calculation and display
+	output_data->peak_potential = peak_potential_used;
 
-	// data to be sent through qaqc reply
-//	if(iref_scan)
-//		output_data->peak_potential = peak_potential_3;
-//	else
-		output_data->peak_potential = peak_potential_1;
-
-	output_data->peak_value = pp.peak_value;
-	output_data->qaqc_2 = pp.QAQC2;
+	output_data->peak_value = peak_value_used;
+	output_data->qaqc_2 = qaqc2_used;
 
 	no_peaks_found = (peaks_found == 0);
 
@@ -278,13 +283,13 @@ void smoothing_function(
 				{
 					failure_diagnostic += 10000;
 					emergency_iref_peak_found = true;
-					emergency_iref_peak_potential = peak_potential_3;
+					emergency_iref_peak_potential = peak_potential_used;
 				}
 			}
 			else
 			{
 				emergency_iref_peak_found = true;
-				emergency_iref_peak_potential = peak_potential_3;
+				emergency_iref_peak_potential = peak_potential_used;
 				iref_flags_ok = false;
 				failure_diagnostic += 40000;
 			}
@@ -293,7 +298,7 @@ void smoothing_function(
 		if(iref_flags_ok)
 		{
 			emergency_iref_peak_found = true; //always keep anything that passed. but this will be rejected in update_task_after_scan if in the first 3 scans
-			emergency_iref_peak_potential = peak_potential_3;
+			emergency_iref_peak_potential = peak_potential_used;
 		}
 
 		iref_QAQC_parameter_change_flag = false;
