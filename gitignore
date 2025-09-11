@@ -1,0 +1,9 @@
+/Debug/
+/Release/
+/Downstairs/
+*.o
+*.cyclo
+*.su
+*.elf
+*.map
+.settings/
