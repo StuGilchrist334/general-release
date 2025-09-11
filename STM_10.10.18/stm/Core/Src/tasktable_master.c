@@ -42,6 +42,10 @@ void process_peak_potentials_after_scan(void)
 
 	if(iref_scan)
 	{
+		///sg! bypass bad irefs
+		last_good_peak_potential = 700; //825;
+		iref_flags_ok = true;
+
 		if(iref_flags_ok)
 		{
 			iref_scan_pp_values[current_task.scan_number_current - 1] = last_good_peak_potential;
@@ -212,7 +216,7 @@ void process_peak_potentials_after_scan(void)
 			last_passed_ph_qaqc = 0;
 			reset_qaqcs();
 		}
-
+/*
 		//we might have passed limits, but is the peak reliable? continuous data will be rejected as outlier anyway
 		//so this only applies to an interval when the array has been cleared and we've found good data
 		if(!current_task.multielectrode_scan && (ph_flags_ok || ph_failed_only_as_outlier) && (scan_interval_flag || !electrode_array_looped) && (avg_ph_peak_potential_stored || first_good_ph_data_found))
@@ -225,16 +229,16 @@ void process_peak_potentials_after_scan(void)
 
 				failure_diagnostic += 400;
 			}
-/*			else if(ph_failed_only_as_outlier && !new_peak_established) //we're in business sg! does this mean on a new loop the first outlier clears the array?
-			{
-				ph_flags_ok = true;
-				suspect_peak_count = 0;
-				clear_ph_array(); //now we can put this value back in as our new starting point, clearing any old data
-				qaqc_reply.calculated_ph = calculate_ph(qaqc_reply.peak_potential, qaqc_reply.calculated_temperature, avg_iref_peak_potential);
-				if(current_task.include_in_ph_array)
-					qaqc_reply.running_average_ph = calculate_ph_running_average_scan(current_task.sensor_number, current_task.set_electrode, qaqc_reply.calculated_ph);
-			}
-*/
+//			else if(ph_failed_only_as_outlier && !new_peak_established) //we're in business sg! does this mean on a new loop the first outlier clears the array?
+//			{
+//				ph_flags_ok = true;
+//				suspect_peak_count = 0;
+//				clear_ph_array(); //now we can put this value back in as our new starting point, clearing any old data
+//				qaqc_reply.calculated_ph = calculate_ph(qaqc_reply.peak_potential, qaqc_reply.calculated_temperature, avg_iref_peak_potential);
+//				if(current_task.include_in_ph_array)
+//					qaqc_reply.running_average_ph = calculate_ph_running_average_scan(current_task.sensor_number, current_task.set_electrode, qaqc_reply.calculated_ph);
+//			}
+
 			//sg! suspect peaks need to be in the same direction. put this in. in meantime extend number to stop it messing
 			if(suspect_peak_count > 5) //we've got to go with something, and let's assume the new peaks are due to a change in pH or salinity
 			{
@@ -243,7 +247,7 @@ void process_peak_potentials_after_scan(void)
 				new_peak_established = true;
 			}
 		}
-
+*/
 		//store the peak potential
 		if(!current_task.multielectrode_scan)
 		{
