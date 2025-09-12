@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define FIRMWARE_VERSION "STM_10.10.22D"
+#define FIRMWARE_VERSION "STM_10.10.23D"
 
 //STM_10.8 release is STM_10.7.18
 //STM_10.7.01 has new global scan variables, randomized numbering, adaptive scanning based on iref
@@ -131,6 +131,7 @@ extern int loops_since_start;
 extern double last_good_peak_potential;
 extern int ringer_electrode_1;
 extern int ringer_electrode_2;
+extern bool stu_debug;
 
 #define QAQC_REPLY_LAST_SCAN 0x00
 #define QAQC_REPLY_NOT_LAST_SCAN 0xFF

@@ -38,6 +38,7 @@ bool loop_complete = false;
 
 int ringer_electrode_1 = 11;
 int ringer_electrode_2 = 5;
+bool stu_debug = true;
 
 task task_iref_ocean = {
 	IREF_PRIMARY_SENSOR_NUMBER,
@@ -246,11 +247,15 @@ void get_first_ph_scan()
 
 	//<defaults set
 
-//	if((loops_since_start * loop_interval) > 360) //6 hours
-//		ph_peak_shift_start = 275;
-//	if((loop_interval == 0) && (loops_since_start > 36))
-//		ph_peak_shift_start = 275;
+	if(stu_debug) //check this works for both fresh and ocean
+	{
+		ph_peak_shift_start = 150;
 
+		if((loops_since_start * loop_interval) > 360) //6 hours
+			ph_peak_shift_start = 275;
+		if((loop_interval == 0) && (loops_since_start > 36))
+			ph_peak_shift_start = 275;
+	}
 	//set start and span if we have previous data stored
 	if(avg_ph_peak_potential_stored) //override the start and span if we've got good data to refer to
 	{
@@ -381,8 +386,11 @@ void update_electrode_numbers(void)
 		using_ringers = true;
 	}
 
-	//healthwatching = true; //post abrade version for diagnostics
-	//using_ringers = true;
+	if(stu_debug)
+	{
+		healthwatching = true; //post abrade version for diagnostics
+		using_ringers = true;
+	}
 
 	int first_healthwatch_electrode_number, second_healthwatch_electrode_number;
 	int loop_count = eeprom_read_loop_count();
