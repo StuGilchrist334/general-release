@@ -222,12 +222,6 @@ double calculate_ph_running_average_scan(int sensor_number, bool set_electrode, 
 				ph_increasing = false;
 			}
 
-			if(suspect_ph_count >= suspect_ph_count_threshold) //let's act
-			{
-				change_detected = true;
-				suspect_ph_count = 0;
-			}
-
 			int extreme_index = count / 6.0; //will represent the outer elements of the sorted array
 
 			//this check is to see if the array has crept to a point where an unchanging average is now near the edges of the spread
@@ -235,6 +229,15 @@ double calculate_ph_running_average_scan(int sensor_number, bool set_electrode, 
 			{
 				change_detected = true;
 				alpha = 0.5; //bring it into line quickly
+			}
+			else if(suspect_ph_count >= suspect_ph_count_threshold) //let's act
+			{
+				change_detected = true;
+				suspect_ph_count = 0;
+			}
+			else if(ph_array_index == 0) //recalculate periodically to keep things tight
+			{
+				change_detected = true;
 			}
 
 			if(change_detected)

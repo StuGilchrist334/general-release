@@ -42,10 +42,6 @@ void process_peak_potentials_after_scan(void)
 
 	if(iref_scan)
 	{
-		///sg! bypass bad irefs
-		last_good_peak_potential = 700; //825;
-		iref_flags_ok = true;
-
 		if(iref_flags_ok)
 		{
 			iref_scan_pp_values[current_task.scan_number_current - 1] = last_good_peak_potential;
@@ -360,6 +356,13 @@ void update_task_after_scan(bool iref_ok, bool ph_ok, int *successive_ph_scan_fa
 			if(current_scan <= 3)
 				emergency_iref_peak_found = false; //ignore the first three scans
 		}
+		else
+			if(current_scan == 3)
+				if(iref_failures == 3)
+				{
+					current_task.start_mv = IREF_OCEAN_START_MV_DEFAULT;
+					current_task.span_mv = IREF_OCEAN_SPAN_MV_INITIAL;
+				}
 
 		//change the span after scan 2 to a lower value if we have found a good peak
 		if((current_task.scan_number_current >= 2) && first_good_iref_data_found)

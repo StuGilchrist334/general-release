@@ -174,6 +174,14 @@ task get_first_iref_scan(int scan_type)
 	iref_scan = true;
 	ph_scan = false;
 
+	if(avg_ph_peak_potential_stored && ocean_scan) //override the start and span if we've got good data to refer to
+	{
+		task_iref.span_mv = IREF_OCEAN_SPAN_MV_REDUCED;
+		task_iref.start_mv = previous_iref_peak_potential + 0.5 * task_iref.span_mv;
+		if(task_iref.start_mv > IREF_OCEAN_START_MV_DEFAULT)
+			task_iref.start_mv = IREF_OCEAN_START_MV_DEFAULT;
+	}
+
 	return task_iref;
 }
 
@@ -238,10 +246,10 @@ void get_first_ph_scan()
 
 	//<defaults set
 
-	if((loops_since_start * loop_interval) > 360) //6 hours
-		ph_peak_shift_start = 275;
-	if((loop_interval == 0) && (loops_since_start > 36))
-		ph_peak_shift_start = 275;
+//	if((loops_since_start * loop_interval) > 360) //6 hours
+//		ph_peak_shift_start = 275;
+//	if((loop_interval == 0) && (loops_since_start > 36))
+//		ph_peak_shift_start = 275;
 
 	//set start and span if we have previous data stored
 	if(avg_ph_peak_potential_stored) //override the start and span if we've got good data to refer to

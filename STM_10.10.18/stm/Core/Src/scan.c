@@ -501,7 +501,7 @@ void scan(int scan_type)
 					{
 						//add in temperature correction to calculation below
 						qaqc_reply.running_average_ph += 0.018*(avg_iref_peak_potential - suspect_iref_peak_potential);//make a desperate late lunge to get the pH back where it should be
-						avg_iref_peak_potential = suspect_iref_peak_potential; //so we lost a loop with the wrong iref
+						avg_iref_peak_potential = suspect_iref_peak_potential; //so we lost a loop with the wrong iref. those pH values will remain in the array.
 						// check if new calculation is within 0 and 14
 						if((qaqc_reply.running_average_ph < 0.0) || (qaqc_reply.running_average_ph > 14.0))
 							qaqc_reply.running_average_ph = PH_DEFAULT_OUT_OF_RANGE_VALUE;
