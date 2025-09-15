@@ -42,6 +42,13 @@ void process_peak_potentials_after_scan(void)
 
 	if(iref_scan)
 	{
+
+		if(stu_debug)
+		{
+			iref_flags_ok = true;
+			last_good_peak_potential = 825;
+		}
+
 		if(iref_flags_ok)
 		{
 			iref_scan_pp_values[current_task.scan_number_current - 1] = last_good_peak_potential;
