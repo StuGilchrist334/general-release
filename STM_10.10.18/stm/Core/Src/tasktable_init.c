@@ -255,6 +255,9 @@ void get_first_ph_scan()
 			ph_peak_shift_start = 275;
 		if((loop_interval == 0) && (loops_since_start > 36))
 			ph_peak_shift_start = 275;
+
+		if((loops_since_start * loop_interval) > 1440) //24 hours
+			ph_peak_shift_start = 325;
 	}
 	//set start and span if we have previous data stored
 	if(avg_ph_peak_potential_stored) //override the start and span if we've got good data to refer to
