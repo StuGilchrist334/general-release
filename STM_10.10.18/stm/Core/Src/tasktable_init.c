@@ -38,7 +38,7 @@ bool loop_complete = false;
 
 int ringer_electrode_1 = 11;
 int ringer_electrode_2 = 5;
-bool stu_debug = true;
+bool stu_debug = false; //true;
 
 task task_iref_ocean = {
 	IREF_PRIMARY_SENSOR_NUMBER,
