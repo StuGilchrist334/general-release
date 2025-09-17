@@ -1,7 +1,0 @@
-../Core/Src/eeprom_M95080.c:10:6:eeprom_write_byte	40	static
-../Core/Src/eeprom_M95080.c:32:6:eeprom_write_byte_with_readback_check	40	static
-../Core/Src/eeprom_M95080.c:48:9:eeprom_read_byte	40	static
-../Core/Src/eeprom_M95080.c:70:6:eeprom_erase_all	56	static
-../Core/Src/eeprom_M95080.c:82:6:eeprom_write_buffer	32	static
-../Core/Src/eeprom_M95080.c:108:6:eeprom_write_buffer_with_readback_check	48	static
-../Core/Src/eeprom_M95080.c:132:6:eeprom_wait_for_write_to_complete	8	static

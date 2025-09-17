@@ -1,2 +1,0 @@
-../Core/Src/adc_ad7766.c:25:7:ad7766_init	32	static
-../Core/Src/adc_ad7766.c:46:9:ad7766_convert	32	static

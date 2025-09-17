@@ -1,2 +1,0 @@
-../Core/Src/ioport.c:57:6:ioport_set_pin_level	32	static
-../Core/Src/ioport.c:62:6:ioport_get_pin_level	16	static

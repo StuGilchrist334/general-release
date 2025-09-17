@@ -1,7 +1,0 @@
-../Core/Src/eeprom_M95080.c:10:6:eeprom_write_byte	2
-../Core/Src/eeprom_M95080.c:50:9:eeprom_read_byte	1
-../Core/Src/eeprom_M95080.c:32:6:eeprom_write_byte_with_readback_check	3
-../Core/Src/eeprom_M95080.c:84:6:eeprom_write_buffer	1
-../Core/Src/eeprom_M95080.c:110:6:eeprom_write_buffer_with_readback_check	4
-../Core/Src/eeprom_M95080.c:72:6:eeprom_erase_all	2
-../Core/Src/eeprom_M95080.c:134:6:eeprom_wait_for_write_to_complete	1

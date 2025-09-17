@@ -1,3 +1,0 @@
-../Core/Src/temperature.c:26:9:get_temperature	5
-../Core/Src/temperature.c:79:8:calculate_temperature	12
-../Core/Src/temperature.c:197:8:VP_calculate_temperature	1

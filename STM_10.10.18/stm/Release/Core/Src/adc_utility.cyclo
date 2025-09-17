@@ -1,5 +1,0 @@
-../Core/Src/adc_utility.c:27:6:adc_utility_init	1
-../Core/Src/adc_utility.c:44:9:adc_convert_manipulate	1
-../Core/Src/adc_utility.c:64:9:adc_convert_manipulate_vp	1
-../Core/Src/adc_utility.c:84:9:adc_conversion	2
-../Core/Src/adc_utility.c:107:6:check_sensor_readings	49
