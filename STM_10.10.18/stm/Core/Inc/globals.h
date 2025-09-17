@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define FIRMWARE_VERSION "STM_10.10.23D"
+#define FIRMWARE_VERSION "STM_10.10.24D"
 
 //STM_10.8 release is STM_10.7.18
 //STM_10.7.01 has new global scan variables, randomized numbering, adaptive scanning based on iref

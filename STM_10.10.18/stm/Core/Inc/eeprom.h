@@ -131,7 +131,7 @@ void eeprom_save_electrode_gains(void);
 
 void eeprom_save_last_temperature(void);
 
-void eeprom_save_last_passed_ph_qaqc(void);
+void eeprom_save_highest_ph_qaqc(void);
 
 void eeprom_save_ph_running_average(void);
 
@@ -141,7 +141,7 @@ void eeprom_save_avg_ph_peak_potential(void);
 
 double eeprom_read_last_temperature(void);
 
-double eeprom_read_last_passed_ph_qaqc(void);
+double eeprom_read_highest_ph_qaqc(void);
 
 double eeprom_read_ph_running_average(void);
 

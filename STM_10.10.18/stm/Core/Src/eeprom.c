@@ -646,7 +646,7 @@ void eeprom_read_ph_array(void)
 	previous_ph = displayed_ph_running_average;
 
 	last_temperature = eeprom_read_last_temperature();
-	last_passed_ph_qaqc = eeprom_read_last_passed_ph_qaqc();
+	highest_ph_qaqc = eeprom_read_highest_ph_qaqc();
 	avg_ph_peak_potential = eeprom_read_avg_ph_peak_potential();
 	previous_ph_peak_potential = avg_ph_peak_potential;
 	read_value = eeprom_read_byte_with_checks(DEVICE_AVG_PH_PEAK_POTENTIAL_STORED, 0, 1, 0);
@@ -868,13 +868,13 @@ void eeprom_save_last_temperature()
 		eeprom_write_byte_with_readback_check(EEPROM_ADDR + DEVICE_LAST_TEMPERATURE_START + i, value[i]);
 }
 
-void eeprom_save_last_passed_ph_qaqc()
+void eeprom_save_highest_ph_qaqc()
 {
 	uint8_t value[4];
 
-	float_to_byte_array(value, last_passed_ph_qaqc);
+	float_to_byte_array(value, highest_ph_qaqc);
 	for(int i =0 ; i < 4; i++)
-		eeprom_write_byte_with_readback_check(EEPROM_ADDR + DEVICE_LAST_PASSED_PH_QAQC_START + i, value[i]);
+		eeprom_write_byte_with_readback_check(EEPROM_ADDR + DEVICE_highest_PH_QAQC_START + i, value[i]);
 }
 
 void eeprom_save_ph_running_average()
@@ -911,9 +911,9 @@ double eeprom_read_last_temperature()
 	return eeprom_get_float_from_eeprom_bytes(EEPROM_ADDR + DEVICE_LAST_TEMPERATURE_START);
 }
 
-double eeprom_read_last_passed_ph_qaqc()
+double eeprom_read_highest_ph_qaqc()
 {
-	return eeprom_get_float_from_eeprom_bytes(EEPROM_ADDR + DEVICE_LAST_PASSED_PH_QAQC_START);
+	return eeprom_get_float_from_eeprom_bytes(EEPROM_ADDR + DEVICE_highest_PH_QAQC_START);
 }
 
 double eeprom_read_ph_running_average()

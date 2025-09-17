@@ -38,7 +38,7 @@ bool loop_complete = false;
 
 int ringer_electrode_1 = 11;
 int ringer_electrode_2 = 5;
-bool stu_debug = false; //true;
+bool stu_debug = true;
 
 task task_iref_ocean = {
 	IREF_PRIMARY_SENSOR_NUMBER,
@@ -257,6 +257,8 @@ void get_first_ph_scan()
 			ph_peak_shift_start = 275;
 
 		if((loops_since_start * loop_interval) > 1440) //24 hours
+			ph_peak_shift_start = 325;
+		if((loop_interval == 0) && (loops_since_start > 144))
 			ph_peak_shift_start = 325;
 	}
 	//set start and span if we have previous data stored

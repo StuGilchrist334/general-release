@@ -35,7 +35,7 @@ extern double displayed_ph_running_average;
 extern double last_ph_std_dev;
 extern double last_temperature;
 extern double ph_alt_1, ph_alt_2;
-extern double last_passed_ph_qaqc;
+extern double highest_ph_qaqc;
 extern double scan_health;
 
 extern uint8_t iref_health_bad_count;

@@ -8,7 +8,7 @@ bool ph_failed_only_as_outlier = false;
 double last_ph_std_dev = PH_DEFAULT_OUT_OF_RANGE_VALUE;
 double last_temperature = VALUE_UNKNOWN;
 double ph_alt_1 = PH_DEFAULT_OUT_OF_RANGE_VALUE, ph_alt_2 = PH_DEFAULT_OUT_OF_RANGE_VALUE;
-double last_passed_ph_qaqc = 0;
+double highest_ph_qaqc = 0;
 double scan_health = 0;
 int good_electrodes;
 bool array_cleared = false;
@@ -115,7 +115,7 @@ double calculate_ph_running_average_scan(int sensor_number, bool set_electrode, 
 	}
 	else
 	{
-		failure_diagnostic += 900;
+		failure_diagnostic += 800;
 		ph_flags_ok = false;
 		perfect_pass = false;
 		return displayed_ph_running_average;

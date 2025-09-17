@@ -481,7 +481,7 @@ void scan(int scan_type)
 			electrode_array_looped = true; //so next time around the transducer health looks at all electrodes
 			eeprom_save_ph_array();
 			eeprom_save_last_temperature();
-			eeprom_save_last_passed_ph_qaqc();
+			eeprom_save_highest_ph_qaqc();
 
 			if(first_good_ph_data_found || (good_peak_count > 0)) //this will indicate whether the stored value is from a successful measurement
 			{

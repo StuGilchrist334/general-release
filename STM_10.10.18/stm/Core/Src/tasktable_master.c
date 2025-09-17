@@ -206,7 +206,7 @@ void process_peak_potentials_after_scan(void)
 				else
 				{
 					//double alpha = 0.3;
-					//last_passed_ph_qaqc = alpha*qaqc_reply.qaqc_1+ (1.0-alpha)*last_passed_ph_qaqc; //in case of sudden changes, weight towards existing figure
+					//highest_ph_qaqc = alpha*qaqc_reply.qaqc_1+ (1.0-alpha)*highest_ph_qaqc; //in case of sudden changes, weight towards existing figure
 					suspect_qaqc_count = 0;
 				}
 			}
@@ -216,7 +216,7 @@ void process_peak_potentials_after_scan(void)
 		{
 			reset_start_and_span = true;
 			suspect_qaqc_count = 0;
-			last_passed_ph_qaqc = 0;
+			highest_ph_qaqc = 0;
 			reset_qaqcs();
 		}
 /*

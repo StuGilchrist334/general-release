@@ -625,8 +625,8 @@ void process_commands(void)
 		eeprom_write_loops_since_last_event(0);
 		event_passed = false;
 		reset_clipped_at_gain();
-		last_passed_ph_qaqc = 0;
-		eeprom_save_last_passed_ph_qaqc();
+		highest_ph_qaqc = 0;
+		eeprom_save_highest_ph_qaqc();
 		avg_iref_peak_potential = 0;
 		eeprom_save_avg_iref_peak_potential();
 		abraded = true;
